@@ -2,31 +2,53 @@
 <html>
     <head lang=en>
         <title>SplitMate</title>
+        <link href=./css/index.css rel=stylesheet title=main>
+        <link href="https://fonts.googleapis.com/css?family=Neuton:800|Open+Sans:400,700" rel="stylesheet">
+        
+        
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="970239039977-e085je51cdsf0191okl0kr1u8ks4u6l7.apps.googleusercontent.com">
         <script src="js/main.js"></script>
     </head>
     <body>
         <main>
             <header>
-                <img src="/images/logo.png" id=logo />
+                <img src="/images/logo.png" id=logo/>
                 <h1>SplitMate</h1>
                 <h2>Bills made simple.</h2>
             </header>
             <nav>
                 <ul>
-                    <a href=help.html><li id=last>Help</li></a>
+                    <a href=#><li id=last>My Home</li></a>
                     <a href=about.html><li>About</li></a>
                     <a href=#><li>Home</li></a>
                 </ul>
             </nav>
             <article>
                 <h3>Create an event</h3>
-                <p> Fill in this form to create an account </p>
-                <p>
-                Event name: <input type="text" size="25" id="eventName"> <br>
-                Event description:<input type="text" size="40" id="eventDescription"> <br>
-                Total spent:  <input type="text" size="10" id="totalSpent"> <br>
-                <button type="button" onclick="createAnEvent()">Create</button>
-                </p>
+                <p> Fill in this form to create an event</p>
+                <form>
+                <label>Event name: </label>
+                    <input 
+                           type="text" 
+                           size="25" 
+                           id="eventName">
+                <label>Event description:</label>
+                    <input 
+                           type="text" 
+                           size="40" 
+                           id="eventDescription">
+                <label>Total spent:</label>
+                    <input 
+                           type="text" 
+                           size="10" 
+                           id="totalSpent">
+                <!--<button type="button" 
+                        onclick="makeEvent()" 
+                        id=blue 
+                        id=makeEvent 
+                        disabled=false>Create</button>-->
+                </form>
                 <p id="output2">Output = ?? </p>
             </article>
             <footer>
