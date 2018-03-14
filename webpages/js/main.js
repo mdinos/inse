@@ -120,3 +120,30 @@ var createAnEvent = function() {
     output2.textContent = 'Event' + eventName + 'Description' + eventDescription + 'Users' + testBalance;
   }
 };
+
+/* Updated createEvent function - currently work in progress
+
+async function makeEvent() {
+    console.log("Started making");
+    
+    let eventName = (document.getElementById('eventName').value);
+    let eventDescription = (document.getElementById('eventDescription').value);
+    let testBalance = parseInt(document.getElementById('totalSpent').value);
+    
+    let url = 'api/makeevent'
+    
+    url += '?eventName=' + eventName;
+    url += '?eventDesc=' + eventDescription;
+    url += '?testBalance' + testBalance;
+    
+    document.getElementById("makeEvent").disabled = true;
+    
+    const response = await fetch(url, { method: 'POST' });
+    
+    if (!response.ok) {
+        console.log("fetch for /api/makeevent' has failed");
+        return;
+    }
+    
+    console.log(response);
+}*/
