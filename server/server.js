@@ -24,6 +24,33 @@ app.get('/api/login', login);
 app.get('/api/logout', logout);
 app.get('/api/hello', hello);
 
+// Make a new event - currently not working //
+
+/*
+let events = [];
+let usedIds = [1];
+
+app.post('/api/makeevent', function (req, res) {
+    console.log("success");
+    
+    console.log(usedIds);
+    let newId = usedIds[usedIds.length - 1] + 1;
+    usedIds.push(newId);
+    usedIds.shift();
+    console.log(usedIds);
+    
+    let newEvent = {
+        "id": newId,
+        "eventName": request.query.eventName,
+        "eventDescription": request.query.eventDesc,
+        "testBalance": request.query.testBalance
+    }
+    
+    events.unshift(newEvent);
+    response.send(newEvent);
+    console.log("Event sent");
+    
+});*/
 
 function hello(req, res) {
   res.send('Hello ' + (req.user.displayName || 'user without a name') + '!');
