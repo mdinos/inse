@@ -13,6 +13,7 @@
     <body>
         <main>
             <header>
+                <img src="/images/logo.png" id=logo />
                 <h1>SplitMate</h1>
                 <h2>Bills made simple.</h2>
             </header>
@@ -46,23 +47,21 @@
                 <div id='emailinput'>
                   <label>User Email: </label>
                     <input id='emailin'
-                            type="text"
-                            size="40"
-                            id="userEmailIn">
-                  <button><a href='#' onclick="addEmail();">Add Email</a></button>
+                            type="email"
+                            size="40">
+                  <button class=blue onclick="return addEmail();">Add Email</button>
                   <p>Current Emails:</p>
                   <ul id='emaillist'>
-                    <li>No Emails to display </li>
+                    <li id=init>No emails to display</li>
                   </ul>
                 </div>
-                <button><a href='#' onclick="validateEntries();">Confirm Details</a></button>
+                <a href='#' onclick="validateEntries();"><button class=blue>Confirm Details</button></a>
 
 
-                <!--<button type="button"
-                        onclick="makeEvent()"
-                        id=blue
-                        id=makeEvent
-                        disabled=false>Create</button>-->
+                <button type="button"
+                        onclick="makeEvent();"
+                        class=blue
+                        id=makeEvent>Create</button>
                 </form>
                 <p id="output2">Output = ?? </p>
             </article>

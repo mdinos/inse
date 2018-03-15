@@ -121,7 +121,7 @@ var createAnEvent = function() {
   }
 };
 
-/* Updated createEvent function - currently work in progress
+// Updated createEvent function - currently work in progress
 
 async function makeEvent() {
     console.log("Started making");
@@ -136,8 +136,6 @@ async function makeEvent() {
     url += '?eventDesc=' + eventDescription;
     url += '?testBalance' + testBalance;
     
-    document.getElementById("makeEvent").disabled = true;
-    
     const response = await fetch(url, { method: 'POST' });
     
     if (!response.ok) {
@@ -146,4 +144,28 @@ async function makeEvent() {
     }
     
     console.log(response);
-}*/
+}
+
+// function to add another email to event, makes current emails appear in list below input box
+function addEmail() {
+    let email = document.getElementById('emailin');
+    let container = document.getElementById('emaillist');
+    
+    // validate email input
+    // if email in database
+    // then proceed
+    // else send invite
+    
+    let displayEmail = document.createElement('li');
+    container.appendChild(displayEmail);
+    displayEmail.innerHTML = email.value;
+    email.value = "";
+    
+    let item = container.children;
+    
+    if (item[0].innerHTML == "No emails to display") {
+        container.removeChild(item[0]);
+    }
+    
+    return false;
+}
