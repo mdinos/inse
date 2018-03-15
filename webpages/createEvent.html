@@ -1,54 +1,68 @@
 <!DOCTYPE html>
 <html>
     <head lang=en>
-        <meta charset="utf-8">
-        <link href="../css/index.css" rel=stylesheet title=main>
+        <title>SplitMate</title>
+        <link href=./css/index.css rel=stylesheet title=main>
         <link href="https://fonts.googleapis.com/css?family=Neuton:800|Open+Sans:400,700" rel="stylesheet">
-        
+
+
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="970239039977-e085je51cdsf0191okl0kr1u8ks4u6l7.apps.googleusercontent.com">
         <script src="js/main.js"></script>
-        
-        <title>SplitMate</title>
     </head>
     <body>
         <main>
             <header>
-                <img src="/images/logo.png" id=logo/>
                 <h1>SplitMate</h1>
                 <h2>Bills made simple.</h2>
             </header>
             <nav>
-                <ul>
+                <!--<ul> - Nav bar not really needed in this page.
                     <a href=#><li id=last>My Home</li></a>
                     <a href=about.html><li>About</li></a>
                     <a href=#><li>Home</li></a>
-                </ul>
+                </ul>-->
             </nav>
             <article>
                 <h3>Create an event</h3>
                 <p> Fill in this form to create an event</p>
                 <form>
                 <label>Event name: </label>
-                    <input 
-                           type="text" 
-                           size="25" 
+                    <input
+                           type="text"
+                           size="25"
                            id="eventName">
                 <label>Event description:</label>
-                    <input 
-                           type="text" 
-                           size="140"
+                    <input
+                           type="text"
+                           size="40"
                            id="eventDescription">
                 <label>Total spent:</label>
-                    <input 
-                           type="text" 
-                           size="10" 
+                    <input
+                           type="text"
+                           size="10"
                            id="totalSpent">
-                <button type="button" 
-                        onclick="makeEvent()" 
-                        class=blue 
-                        id=makeEvent 
-                        disabled=false>Create</button>
+                <p> Please enter user's emails to add to this event: </p>
+                <div id='emailinput'>
+                  <label>User Email: </label>
+                    <input id='emailin'
+                            type="text"
+                            size="40"
+                            id="userEmailIn">
+                  <button><a href='#' onclick="addEmail();">Add Email</a></button>
+                  <p>Current Emails:</p>
+                  <ul id='emaillist'>
+                    <li>No Emails to display </li>
+                  </ul>
+                </div>
+                <button><a href='#' onclick="validateEntries();">Confirm Details</a></button>
+
+
+                <!--<button type="button"
+                        onclick="makeEvent()"
+                        id=blue
+                        id=makeEvent
+                        disabled=false>Create</button>-->
                 </form>
                 <p id="output2">Output = ?? </p>
             </article>
