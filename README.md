@@ -11,4 +11,7 @@ Navigate to the folder where you cloned the repo in your terminal
 Type the following to start the server:
 ```
 node server/server
+
 ```
+then open an HTML browser and type :
+localhost:8000
