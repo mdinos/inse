@@ -63,6 +63,34 @@ async function populateMain(googleUser) {
   // populate me!
 }
 
+async function deliver(page) {
+    page += ".html";
+    const token = localStorage.getItem("id_token");
+    let auth2 = gapi.auth2.getAuthInstance();
+    
+    const fetchOptions = {
+        credentials: 'same-origin',
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token }
+    };
+    
+    let url = '/api/deliver';
+    
+    url += '?page=' + page;
+    
+    const response = await fetch(url, fetchOptions);
+    
+    if (!response.ok) {
+        console.log("fetch response for api/deliver has failed");
+        return
+    }
+    let innerhtml = await response.text();
+    console.log("innerhtml:")
+    console.log(innerhtml);
+    document.documentElement.innerHTML = innerhtml;
+    
+}
+
 async function signOut() {
   console.log("entered function");
   const token = localStorage.getItem("id_token");
@@ -82,7 +110,6 @@ async function signOut() {
   }
 
   let innerhtml = await response.text();
-  console.log(innerhtml);
   document.documentElement.innerHTML = innerhtml;
 
   window.location.reload();
@@ -111,13 +138,13 @@ async function makeEvent() {
     url += '&testBalance=' + testBalance;
     url += '&emails=' + emails;
     
-    const _fetchOptions = {
+    const fetchOptions = {
         credentials: 'same-origin',
         method: 'POST',
         headers: { 'Authorization': 'Bearer ' + _token },
     };
     
-    const response = await fetch(url, _fetchOptions);
+    const response = await fetch(url, fetchOptions);
     
     if (!response.ok) {
         console.log("fetch for /api/makeevent' has failed");

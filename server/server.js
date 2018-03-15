@@ -21,7 +21,11 @@ app.use('/api', GoogleAuth.guardMiddleware());
 app.get('/api/login', login);
 app.get('/api/logout', logout);
 app.get('/api/hello', hello);
+app.get('/api/deliver', deliver);
+//app.get('/api/myevents', myEvents);
 app.post('/api/makeevent', createEvent);
+
+// Initialise the events array
 
 let events = [
     {
@@ -34,6 +38,30 @@ let events = [
 ];
 
 let usedIds = [1];
+
+function hello(req, res) {
+  console.log('successful authenticated request by ' + req.user.emails[0].value);
+}
+
+function login (req, res) {
+  res.sendFile('main.html', {root: '../webpages'});
+  console.log('main.html sent');
+}
+
+function logout (req, res) {
+  res.sendFile('index.html', {root: '../webpages'});
+  console.log('index.html sent');
+}
+
+function deliver (req, res) {
+    let page = req.query.page;
+    res.sendFile(page, {root: '../webpages'});
+    console.log(page + " sent");
+}
+
+/*function myEvents(req, res) {
+    
+}*/
 
 function createEvent(request, response) {
     let newId = usedIds[usedIds.length - 1] + 1;
@@ -53,18 +81,3 @@ function createEvent(request, response) {
     console.log("Event sent");
     console.log(newEvent);
 };
-
-function hello(req, res) {
-  res.send('Hello ' + (req.user.displayName || 'user without a name') + '!');
-  console.log('successful authenticated request by ' + req.user.emails[0].value);
-}
-
-function login (req, res) {
-  res.sendFile('main.html', {root: '../webpages'});
-  console.log('main.html sent');
-}
-
-function logout (req, res) {
-  res.sendFile('index.html', {root: '../webpages'});
-  console.log('index.html sent');
-}
