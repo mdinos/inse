@@ -18,11 +18,11 @@
                 <h2>Bills made simple.</h2>
             </header>
             <nav>
-                <!--<ul> - Nav bar not really needed in this page.
-                    <a href=#><li id=last>My Home</li></a>
-                    <a href=about.html><li>About</li></a>
-                    <a href=#><li>Home</li></a>
-                </ul>-->
+                <ul>
+                    <a href='#' onclick="signOut();"><li id=last>Sign Out</li></a>
+                    <a href='#'><li>Create Event</li></a>
+                    <a href='#' onclick="deliver('main');"><li>My Home</li></a>
+                </ul>
             </nav>
             <article>
                 <h3>Create an event</h3>
@@ -61,7 +61,6 @@
                         class=blue
                         id=createEvent>Create</button>
                 </form>
-                <p id="output2">Output = ?? </p>
             </article>
             <footer>
                 <p>
