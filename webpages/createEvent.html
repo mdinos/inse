@@ -5,6 +5,7 @@
         <link href=./css/index.css rel=stylesheet title=main>
         <link href="https://fonts.googleapis.com/css?family=Neuton:800|Open+Sans:400,700" rel="stylesheet">
 
+
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="970239039977-e085je51cdsf0191okl0kr1u8ks4u6l7.apps.googleusercontent.com">
         <script src="js/main.js"></script>
@@ -14,14 +15,14 @@
             <header>
                 <img src="/images/logo.png" id=logo />
                 <h1>SplitMate</h1>
-                <h2>Bills made simple.<span id='greeting'></span></h2>
+                <h2>Bills made simple.</h2>
             </header>
             <nav>
-                <ul>
-                    <a href='#' onclick="signOut();"><li id=last>Sign Out</li></a>
-                    <a href='#'><li>Create Event</li></a>
-                    <a href='#' onclick="deliver('main');"><li>My Home</li></a>
-                </ul>
+                <!--<ul> - Nav bar not really needed in this page.
+                    <a href=#><li id=last>My Home</li></a>
+                    <a href=about.html><li>About</li></a>
+                    <a href=#><li>Home</li></a>
+                </ul>-->
             </nav>
             <article>
                 <h3>Create an event</h3>
@@ -39,20 +40,21 @@
                            id="eventDescription">
                 <label>Total spent:</label>
                     <input
-                           type="text"
-                           size="10"
+                           type="number"
+                           min="0.01"
+                           value="00.00"
+                           step="0.01"
                            id="totalSpent">
                 <p> Please enter user's emails to add to this event: </p>
                   <label>User Email: </label>
                     <input id='emailin'
                             type="email"
                             size="40">
-                  <button class=blue id=addEmail>Add Email</button>
+                  <button class=blue onclick="return addEmail();">Add Email</button>
                   <p>Current Emails:</p>
                   <ul id='emaillist'>
                     <li id=init>No emails to display</li>
                   </ul>
-                <a href='#' onclick="return validateEntries();"><button class=blue>Confirm Details</button></a>
 
                 <button type="button"
                         onclick="makeEvent();"
