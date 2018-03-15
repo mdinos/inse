@@ -40,6 +40,7 @@ let events = [
 let usedIds = [1];
 
 function hello(req, res) {
+  res.send('Hello ' + (req.user.displayName || 'user without a name') + '!');
   console.log('successful authenticated request by ' + req.user.emails[0].value);
 }
 
