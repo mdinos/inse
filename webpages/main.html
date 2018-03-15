@@ -4,7 +4,7 @@
         <title>SplitMate</title>
 
         <link href="https://fonts.googleapis.com/css?family=Neuton:800|Open+Sans:400,700" rel="stylesheet">
-        <link href=./css/main.css rel=stylesheet title=main>
+        <link href=./css/index.css rel=stylesheet title=main>
         <script src="js/main.js"></script>
 
     </head>
@@ -18,15 +18,14 @@
             <nav>
               <ul id='nav'>
                 <li><a href='#' onclick="signOut();">Sign Out</a></li>
-                <li><a href='createEvent.html'>Create Event</a></li>
+                <a href='#' onclick="deliver('createEvent');"><li>Create Event</li></a>
+                  <a href=#><li>My Home</li></a>
             </nav>
             <article>
               <h3>Your Events</h3>
-              <div id='events'>
                 <ul id='eventlist'>
                   <li>No Events</li>
                 </ul>
-              </div>
             </article>
             <footer>
 
