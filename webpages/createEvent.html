@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head lang=en>
-        <title>SplitMate</title>
-        <link href=./css/index.css rel=stylesheet title=main>
+        <meta charset="utf-8">
+        <link href="../css/index.css" rel=stylesheet title=main>
         <link href="https://fonts.googleapis.com/css?family=Neuton:800|Open+Sans:400,700" rel="stylesheet">
-        
         
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id" content="970239039977-e085je51cdsf0191okl0kr1u8ks4u6l7.apps.googleusercontent.com">
         <script src="js/main.js"></script>
+        
+        <title>SplitMate</title>
     </head>
     <body>
         <main>
@@ -36,18 +37,18 @@
                 <label>Event description:</label>
                     <input 
                            type="text" 
-                           size="40" 
+                           size="140"
                            id="eventDescription">
                 <label>Total spent:</label>
                     <input 
                            type="text" 
                            size="10" 
                            id="totalSpent">
-                <!--<button type="button" 
+                <button type="button" 
                         onclick="makeEvent()" 
-                        id=blue 
+                        class=blue 
                         id=makeEvent 
-                        disabled=false>Create</button>-->
+                        disabled=false>Create</button>
                 </form>
                 <p id="output2">Output = ?? </p>
             </article>
