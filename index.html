@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="970239039977-e085je51cdsf0191okl0kr1u8ks4u6l7.apps.googleusercontent.com">
+
+<html>
+    <head lang=en>
+        <title>SplitMate</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Neuton:800|Open+Sans:400,700" rel="stylesheet">
+        <link href=./css/index.css rel=stylesheet title=main>
+        <script src="js/main.js"></script>
+
+    </head>
+    <body>
+        <main>
+            <header>
+                <img src="/images/logo.png" id=logo />
+                <h1>SplitMate</h1>
+                <h2>Bills made simple.</h2>
+            </header>
+            <nav>
+                <ul>
+                    <a href=./static/help.html><li id=last>Help</li></a>
+                    <a href=./static/about.html><li>About</li></a>
+                    <a href=#><li>Home</li></a>
+                </ul>
+            </nav>
+            <article>
+                <h3>Sign In</h3>
+                <div id="googlebutton" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+              </br>
+                <h4>Don't have a Google account?</h4>
+                <a href="https://accounts.google.com/SignUp?hl=en" class="button" target="_blank">Create one here</a>
+            </article>
+            <footer>
+                <p>
+                    <a href=terms.html>Terms of service</a>
+                    <a href=http://facebook.com>Our Facebook</a>
+                    <a href=http://twitter.com>Our Twitter</a>
+                </p>
+            </footer>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,102 @@
+body {
+    background-color: #F5F5F5;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+}
+
+main {
+    max-width: 60em;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-rows: 6em auto 6em;
+    grid-template-areas:
+        "header header header"
+        "nav nav nav";
+}
+
+header {
+    grid-area: header;
+    margin-left: 20px;
+}
+
+div {
+  margin-left: 20px;
+  display: grid;
+  grid-template-rows: 4em auto;
+}
+
+h1 {
+    font-size: 55px;
+    font-family:'Neuton', serif;
+    margin: 0;
+    margin-left: 15px;
+    color: #178178;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    margin-left: 15px;
+    color: #b7b7b7;
+}
+
+
+nav {
+    margin-top: -6em;
+    grid-area: nav;
+    border-bottom-style: solid;
+    border-bottom-width: medium;
+    border-bottom-color: #b7b7b7;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul a li {
+    display: inline;
+    width: 3em;
+    text-align: center;
+    height: 2em;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: sans-serif;
+    float: right;
+    border-right-style: solid;
+    border-right-width: 1.5px;
+    border-color: lightgrey;
+}
+
+ul a {
+    text-decoration: none;
+    color: black;
+}
+
+ul a li:hover {
+    -webkit-animation-name: hover;
+    -webkit-animation-duration: 0.4s;
+    animation-fill-mode: both;
+}
+
+
+#last {
+    border-right: none;
+}
+
+@keyframes hover {
+    from {
+        background-color: #F5F5F5;
+        color: black;
+    }
+    to {
+        background-color: #178178;
+        color: #f5f5f5;
+    }
+}
