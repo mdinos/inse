@@ -206,3 +206,13 @@ footer > p > a {
 footer > p > a:hover {
     color: #b7b7b7;
 }
+
+a.button {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  background-color: #178178;
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+}
