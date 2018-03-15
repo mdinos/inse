@@ -92,6 +92,34 @@ async function signOut() {
 
 // Function which grabs data from create event page, and converts them to JSON format, exporting them to an array on the server.
 
+async function deliver(page) {
+    page += ".html";
+    const token = localStorage.getItem("id_token");
+    let auth2 = gapi.auth2.getAuthInstance();
+    
+    const fetchOptions = {
+        credentials: 'same-origin',
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + token }
+    };
+    
+    let url = '/api/deliver';
+    
+    url += '?page=' + page;
+    
+    const response = await fetch(url, fetchOptions);
+    
+    if (!response.ok) {
+        console.log("fetch response for api/deliver has failed");
+        return
+    }
+    let innerhtml = await response.text();
+    console.log("innerhtml:")
+    console.log(innerhtml);
+    document.documentElement.innerHTML = innerhtml;
+    
+}
+
 async function makeEvent() {
     let eventName = document.getElementById('eventName').value;
     let eventDescription = document.getElementById('eventDescription').value;
