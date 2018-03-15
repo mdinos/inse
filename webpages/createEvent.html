@@ -44,7 +44,6 @@
                            size="10"
                            id="totalSpent">
                 <p> Please enter user's emails to add to this event: </p>
-                <div id='emailinput'>
                   <label>User Email: </label>
                     <input id='emailin'
                             type="email"
@@ -54,14 +53,12 @@
                   <ul id='emaillist'>
                     <li id=init>No emails to display</li>
                   </ul>
-                </div>
-                <a href='#' onclick="validateEntries();"><button class=blue>Confirm Details</button></a>
-
+                <a href='#' onclick="return validateEntries();"><button class=blue>Confirm Details</button></a>
 
                 <button type="button"
                         onclick="makeEvent();"
                         class=blue
-                        id=makeEvent>Create</button>
+                        id=createEvent>Create</button>
                 </form>
                 <p id="output2">Output = ?? </p>
             </article>

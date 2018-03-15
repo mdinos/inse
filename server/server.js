@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const app = express();
 const GoogleAuth = require('simple-google-openid');
@@ -23,34 +21,38 @@ app.use('/api', GoogleAuth.guardMiddleware());
 app.get('/api/login', login);
 app.get('/api/logout', logout);
 app.get('/api/hello', hello);
+app.post('/api/makeevent', createEvent);
 
-// Make a new event - currently not working //
+let events = [
+    {
+        "id": 1,
+        "eventName": "Death Star Destruction",
+        "eventDescription": "Fly into the middle, destroy the core",
+        "testBalance": 33.25,
+        "emails": ["marcus@email.com", "jack@email.com"]
+    }
+];
 
-/*
-let events = [];
 let usedIds = [1];
 
-app.post('/api/makeevent', function (req, res) {
-    console.log("success");
-    
-    console.log(usedIds);
+function createEvent(request, response) {
     let newId = usedIds[usedIds.length - 1] + 1;
     usedIds.push(newId);
     usedIds.shift();
-    console.log(usedIds);
     
     let newEvent = {
         "id": newId,
         "eventName": request.query.eventName,
         "eventDescription": request.query.eventDesc,
-        "testBalance": request.query.testBalance
+        "testBalance": request.query.testBalance,
+        "emails": request.query.emails
     }
     
     events.unshift(newEvent);
     response.send(newEvent);
     console.log("Event sent");
-    
-});*/
+    console.log(newEvent);
+};
 
 function hello(req, res) {
   res.send('Hello ' + (req.user.displayName || 'user without a name') + '!');
