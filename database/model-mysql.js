@@ -44,17 +44,28 @@ function login (email, fname, lname) {
   });
 }
 
-function createEvent (eventIdIn, eventNameIn, eventDescIn, eventCostIn, eventEmailsIn) {
+function createEvent (eventNameIn, eventDescIn, eventCostIn, eventEmailsIn) {
   console.log("entered db function 'createEvent'");
-  let insertEmail = "'" + eventEmailsIn + "'";
-  let insertSet = {eventid: eventIdIn, eventName: eventNameIn, eventDesc: eventDescIn, eventCost: eventCostIn, emails: insertEmail};
-  sql.query(sql.format('INSERT INTO event SET ?', insertSet), (err, data) => {
+
+  sql.query(sql.format('SELECT * FROM event ORDER BY eventid DESC LIMIT 0, 1'), (err, data) => {
     if (err) {
-      console.log("error inserting event into db: " + err);
+      console.log("failed to query most recent id" + err);
       return;
     }
-    console.log("succesful insert event into db");
+    console.log(JSON.stringify(data[0].eventid));
+    let insertEmail = "'" + eventEmailsIn + "'";
+    let insertSet = {eventid: JSON.stringify(data[0].eventid) + 1, eventName: eventNameIn, eventDesc: eventDescIn, eventCost: eventCostIn, emails: insertEmail};
+    sql.query(sql.format('INSERT INTO event SET ?', insertSet), (err, data) => {
+      if (err) {
+        console.log("error inserting event into db: " + err);
+        return;
+      }
+      console.log("succesful insert event into db");
+    });
   });
+
+
+
 }
 
 // FUNCTION EXPORTING

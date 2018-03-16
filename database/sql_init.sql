@@ -12,5 +12,8 @@ CREATE TABLE `event`(
   `eventName` VARCHAR(40),
   `eventDesc` VARCHAR(256),
   `eventCost` INT(10),
-  `emails` VARCHAR(256)
+  `emails` VARCHAR(256),
+  `admin` VARCHAR(64)
 );
+
+ALTER TABLE `event` ADD CONSTRAINT `event_fk0` FOREIGN KEY (`email`) REFERENCES `user`(`email`);
