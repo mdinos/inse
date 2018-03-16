@@ -8,30 +8,28 @@ function isEven(n) {
     }
 };
 
+// Function performed when a user signs in with the Google button.
 function onSignIn(googleUser) {
-
   let auth2 = gapi.auth2.getAuthInstance();
+  // Uses local storage to store the session ID token of the user.
   localStorage.setItem("id_token",auth2.currentUser.get().getAuthResponse().id_token);
   auth2.disconnect();
-  console.log("id_token:");
-  console.log(localStorage.id_token);
 
+
+  // Server is called once user is authorized and token is stored.
   callServer(googleUser);
 }
 
+
 async function callServer(googleUser) {
   const token = localStorage.getItem("id_token");
-  console.log("call server's ID token: ");
-  console.log(token);
 
+  // Options used when calling /api/ functios.
   const fetchOptions = {
     //credentials: 'same-origin',
     method: 'GET',
     headers: { 'Authorization': 'Bearer ' + token },
   };
-
-  console.log("fetch options for api/login: ");
-  console.log(fetchOptions);
 
   const response = await fetch('/api/login', fetchOptions);
   if (!response.ok) {
@@ -43,18 +41,21 @@ async function callServer(googleUser) {
   // handle the response
   console.log("/api/login successful");
   let innerhtml = await response.text();
-  console.log("innerhtml:")
-  console.log(innerhtml);
+
+  // InnerHTML of the document is changed.
   document.documentElement.innerHTML = innerhtml;
 
+  // Function called once user accesses the main page.
   populateMain(googleUser);
   //$('html').innerHTML = innerhtml;
 }
 
 async function populateMain(googleUser) {
+  // Personal 'greeting' in the header of the page.
   const profile = googleUser.getBasicProfile();
   const el = document.getElementById('greeting');
   el.textContent = ' – Hello ' + profile.getName() + '!';
+
 
   // check database to see if this user has records (with emaik)
     // if yes then load content`
@@ -64,10 +65,11 @@ async function populateMain(googleUser) {
 }
 
 async function signOut() {
-  console.log("entered function");
+  // Gets token from localStorage
   const token = localStorage.getItem("id_token");
   let auth2 = gapi.auth2.getAuthInstance();
 
+  // Fetch options for server API function call.
   const fetchOptions = {
     credentials: 'same-origin',
     method: 'GET',
@@ -76,39 +78,41 @@ async function signOut() {
 
   const response = await fetch('/api/logout', fetchOptions);
 
+  // Handle failure.
   if (!response.ok) {
     console.log("fetch reponse for /api/logout has failed.");
     return;
   }
 
+  // Handle success: innerHTML is changed back to index.html
   let innerhtml = await response.text();
   console.log(innerhtml);
   document.documentElement.innerHTML = innerhtml;
 
   window.location.reload();
 
+  // Token is removed from localStorage.
   localStorage.removeItem("id_token");
 }
 
 // Function which grabs data from create event page, and converts them to JSON format, exporting them to an array on the server.
-
 async function deliver(page) {
     page += ".html";
     const token = localStorage.getItem("id_token");
     let auth2 = gapi.auth2.getAuthInstance();
-    
+
     const fetchOptions = {
         credentials: 'same-origin',
         method: 'GET',
         headers: { 'Authorization': 'Bearer ' + token }
     };
-    
+
     let url = '/api/deliver';
-    
+
     url += '?page=' + page;
-    
+
     const response = await fetch(url, fetchOptions);
-    
+
     if (!response.ok) {
         console.log("fetch response for api/deliver has failed");
         return
@@ -117,27 +121,31 @@ async function deliver(page) {
     console.log("innerhtml:")
     console.log(innerhtml);
     document.documentElement.innerHTML = innerhtml;
-    
+
 }
 
 async function makeEvent() {
+    // Function which takes the entries of the createEvent page, and creates an event from them.
     let eventName = document.getElementById('eventName').value;
     let eventDescription = document.getElementById('eventDescription').value;
     let testBalance = parseInt(document.getElementById('totalSpent').value);
     let _emails = document.getElementById('emaillist').children;
     let emails = [];
 
+    // Runs a validation function on the entries of this page.
     let eventStatus = validateEntries();
-    console.log("Status of this event: " + eventStatus);
 
+    // Based on the success of the validation, the following code is performed or not:
     if (eventStatus == true) {
       for (i = 0; i < _emails.length; i++) {
           emails.push(_emails[i].innerHTML);
       }
 
+      // Server function is called, which is used to create the event.
       let url = '/api/makeevent';
       const _token = localStorage.getItem("id_token");
 
+      // These credentials are sent to the server function, used to create the event.
       url += '?eventName=' + eventName;
       url += '&eventDesc=' + eventDescription;
       url += '&testBalance=' + testBalance;
@@ -175,7 +183,9 @@ function addEmail() {
 
     let validationStatus = validateEmail (email.value);
 
+    // If the email entered is valid (validated by function below)
     if (validationStatus == true) {
+      // New HTML element is created to display a list of valid emails entered by the user.
       let displayEmail = document.createElement('li');
       container.appendChild(displayEmail);
       displayEmail.innerHTML = email.value;
@@ -195,13 +205,19 @@ function addEmail() {
 }
 
 function validateEmail(email) {
+  // Use of regex to validate the syntax of emails enterd by the user.
+  // It makes sure that all emails have ___@___.___ format (or similar, 2 '.' allowed after @
+  // for example.)
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(String(email).toLowerCase());
+    // true or false returned based on this test
 }
 
 function validateEntries() {
+  // Event is true by default, but will change if tests are failed.
   let isValid = true;
 
+  // Gets element values to be validated.
   let _emails = document.getElementById('emaillist').children;
   let eventName = document.getElementById('eventName').value;
   let testBalance = parseInt(document.getElementById('totalSpent').value);
@@ -210,16 +226,19 @@ function validateEntries() {
   // find replacement for "_emails.length < 2", so that an event is able
   // to have 1 email (instead of rn forced to have 2).
 
+  // Checks if there are any emails in the event.
   if ( _emails.length < 2) {
     alert("Please enter user emails for this event!");
     isValid = false;
   }
 
+  // Checks if the event has a name.
   if (eventName.length < 1) {
     alert("Please enter a name for this event!");
     isValid = false;
   }
 
+  // Checks if the event has a valid cost.
   if (testBalance < 1) {
     alert("Please enter the cost of this event!");
     isValid = false;

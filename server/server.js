@@ -3,21 +3,21 @@ const app = express();
 const GoogleAuth = require('simple-google-openid');
 const path = require('path');
 
+// Server uses index.html in the /webpages folder
 app.use('/', express.static('../webpages', { extensions: ['html'] }));
 
+// Declaration of port to be used by the server.
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);
 });
 
 
-// GOOGLE SHIT //
-
+// GOOGLE AUTH //
 app.use(GoogleAuth('970239039977-e085je51cdsf0191okl0kr1u8ks4u6l7.apps.googleusercontent.com'));
 app.use('/api', GoogleAuth.guardMiddleware());
 
 // SERVER FUNCTIONS //
-
 app.get('/api/login', login);
 app.get('/api/logout', logout);
 app.get('/api/hello', hello);
@@ -26,7 +26,6 @@ app.get('/api/deliver', deliver);
 app.post('/api/makeevent', createEvent);
 
 // Initialise the events array
-
 let events = [
     {
         "id": 1,
@@ -39,21 +38,25 @@ let events = [
 
 let usedIds = [1];
 
+// "Test" function for Google Accounts
 function hello(req, res) {
   res.send('Hello ' + (req.user.displayName || 'user without a name') + '!');
   console.log('successful authenticated request by ' + req.user.emails[0].value);
 }
 
+// Login function, server sends main page HTML as response.
 function login (req, res) {
   res.sendFile('main.html', {root: '../webpages'});
   console.log('main.html sent');
 }
 
+// Logout function, server sends index page HTML as response.
 function logout (req, res) {
   res.sendFile('index.html', {root: '../webpages'});
   console.log('index.html sent');
 }
 
+// Deliver function, server sends HTML of page input.
 function deliver (req, res) {
     let page = req.query.page;
     res.sendFile(page, {root: '../webpages'});
@@ -61,14 +64,17 @@ function deliver (req, res) {
 }
 
 /*function myEvents(req, res) {
-    
+
 }*/
 
+// Server function used to create a new event, based on data sent into the Function
+// from main.js.
 function createEvent(request, response) {
     let newId = usedIds[usedIds.length - 1] + 1;
     usedIds.push(newId);
     usedIds.shift();
-    
+
+    // Structure of array stored.
     let newEvent = {
         "id": newId,
         "eventName": request.query.eventName,
@@ -76,7 +82,7 @@ function createEvent(request, response) {
         "testBalance": request.query.testBalance,
         "emails": request.query.emails
     }
-    
+
     events.unshift(newEvent);
     response.send(newEvent);
     console.log("Event sent");
