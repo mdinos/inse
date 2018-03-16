@@ -13,7 +13,10 @@ Navigate to the /server/ folder and type:
 ```
 npm install simple-google-openid
 ```
-
+Navigate to the /database/ folder and type:
+```
+npm install mysql
+```
 Type the following to start the server:
 ```
 node server
