@@ -15,11 +15,9 @@ function onSignIn(googleUser) {
   localStorage.setItem("id_token",auth2.currentUser.get().getAuthResponse().id_token);
   auth2.disconnect();
 
-
   // Server is called once user is authorized and token is stored.
   callServer(googleUser);
 }
-
 
 async function callServer(googleUser) {
   const token = localStorage.getItem("id_token");
@@ -134,7 +132,25 @@ async function deliver(page) {
     console.log("innerhtml:")
     console.log(innerhtml);
     document.documentElement.innerHTML = innerhtml;
+    if (page == 'createEvent.html') {
+        addUsersEmail(token, auth2, fetchOptions)
+    }
+}
 
+// Function which immediately adds the users email to the list of emails on the page
+async function addUsersEmail(token, auth2, fetchOptions) { 
+    const response = await fetch('/api/getemail', fetchOptions);
+    let userEmail = await response.text();
+    let container = document.getElementById('emaillist');
+    
+    let noEmails = container.children;
+    if (noEmails[0].innerHTML == "No emails to display") {
+          container.removeChild(noEmails[0]);
+    }
+    
+    let displayUserEmail = document.createElement('li');
+    container.appendChild(displayUserEmail);
+    displayUserEmail.innerHTML = userEmail;
 }
 
 async function makeEvent() {

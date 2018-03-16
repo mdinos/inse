@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/mdinos/inse#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "simple-google-openid": "^0.2.2"
   }
 }

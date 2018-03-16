@@ -25,6 +25,7 @@ app.get('/api/login', login);
 app.get('/api/logout', logout);
 app.get('/api/hello', hello);
 app.get('/api/deliver', deliver);
+app.get('/api/getemail', getEmail);
 //app.get('/api/myevents', myEvents);
 app.post('/api/makeevent', createEvent);
 app.post('/api/checkuser', checkuser);
@@ -106,4 +107,9 @@ async function checkuser (req, res) {
   console.log("user's name split: " + firstName + " " + lastName);
   await db.login(req.user.emails[0].value, firstName, lastName);
   return;
+}
+
+function getEmail(req, res) {
+    let email = req.user.emails[0].value;
+    res.send(email);
 }
