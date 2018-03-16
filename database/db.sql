@@ -3,6 +3,7 @@ CREATE DATABASE IF NOT EXISTS splitmatedb;
 CREATE TABLE 'user' (
   'email' VARCHAR(64) PRIMARY KEY,
   'fname' VARCHAR(40) NOT NULL,
+  'password' VARCHAR(40) NOT NULL,
   'lname' VARCHAR(40) NOT NULL,
   'admin' TINYINT(1),
 );
