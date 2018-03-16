@@ -17,13 +17,9 @@ Navigate to the /database/ folder and type:
 ```
 npm install mysql
 ```
-Type the following to start the server:
+Navigate back to the /server/ folder, and type the following to start the server:
 ```
 node server
-```
-or from the root directory (/inse)
-```
-node server/server
 ```
 then open an HTML browser and type :
 localhost:8000
