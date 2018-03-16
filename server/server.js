@@ -76,7 +76,24 @@ function deliver (req, res) {
 // Server function used to create a new event, based on data sent into the Function
 // from main.js.
 async function createEvent(req, res) {
+    let newId = usedIds[usedIds.length - 1] + 1;
+    usedIds.push(newId);
+    usedIds.shift();
+
+    // Structure of array stored.
+    let newEvent = {
+        "id": newId,
+        "eventName": req.query.eventName,
+        "eventDescription": req.query.eventDesc,
+        "testBalance": req.query.testBalance,
+        "emails": req.query.emails
+    }
+
     await db.createEvent(req.query.eventName, req.query.eventDesc, req.query.testBalance, req.query.emails);
+    //events.unshift(newEvent);
+    //response.send(newEvent);
+    console.log("Event sent");
+    console.log(newEvent);
 };
 
 
@@ -84,7 +101,10 @@ async function checkuser (req, res) {
   let fullName = req.user.displayName;
   let firstName = fullName.split(' ').slice(0, -1).join(' ');
   let lastName = fullName.split(' ').slice(-1).join(' ');
-
+  console.log("entered checkuser function");
+  console.log("email to be sent:" + req.user.emails[0].value);
+  console.log("user's name: " + req.user.displayName);
+  console.log("user's name split: " + firstName + " " + lastName);
   await db.login(req.user.emails[0].value, firstName, lastName);
   return;
 }
