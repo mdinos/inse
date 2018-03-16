@@ -56,7 +56,20 @@ async function populateMain(googleUser) {
   const el = document.getElementById('greeting');
   el.textContent = ' – Hello ' + profile.getName() + '!';
 
+  const token = localStorage.getItem("id_token");
+  const fetchOptions = {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token },
+  };
 
+  const response = await fetch('/api/checkuser', fetchOptions);
+  if (!response.ok) {
+    // handle the error
+    console.log("fetch response for /api/checkuser has failed.");
+    return;
+  }
+
+  console.log("insertion into db successful");
   // check database to see if this user has records (with emaik)
     // if yes then load content`
     // if not then create fields!

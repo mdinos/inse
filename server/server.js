@@ -3,6 +3,9 @@ const app = express();
 const GoogleAuth = require('simple-google-openid');
 const path = require('path');
 
+const db = require('../database/model-mysql');
+
+
 // Server uses index.html in the /webpages folder
 app.use('/', express.static('../webpages', { extensions: ['html'] }));
 
@@ -24,6 +27,8 @@ app.get('/api/hello', hello);
 app.get('/api/deliver', deliver);
 //app.get('/api/myevents', myEvents);
 app.post('/api/makeevent', createEvent);
+app.post('/api/checkuser', checkuser);
+
 
 // Initialise the events array
 let events = [
@@ -88,3 +93,16 @@ function createEvent(request, response) {
     console.log("Event sent");
     console.log(newEvent);
 };
+
+
+async function checkuser (req, res) {
+  let fullName = req.user.displayName;
+  let firstName = fullName.split(' ').slice(0, -1).join(' ');
+  let lastName = fullName.split(' ').slice(-1).join(' ');
+  console.log("entered checkuser function");
+  console.log("email to be sent:" + req.user.emails[0].value);
+  console.log("user's name: " + req.user.displayName);
+  console.log("user's name split: " + firstName + lastName);
+  await db.login(req.user.emails[0].value, firstName, lastName);
+  return;
+}
