@@ -105,29 +105,49 @@ footer {
 
 /* SIGN OUT BUTTON */
 
-#nav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-#nav li {
-  display: inline;
+ul a li {
+    display: inline;
+    width: 3em;
+    text-align: center;
+    height: 2em;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: sans-serif;
+    float: right;
+    border-right-style: solid;
+    border-right-width: 1.5px;
+    border-color: lightgrey;
 }
 
-#nav li a {
-  float: right;
-  text-align: center;
-  text-decoration: none;
-  color: black;
-  margin-top: 62px;
-  padding: 5px;
-  border-left: 2px solid #b7b7b7;
+ul a {
+    text-decoration: none;
+    color: black;
 }
 
-#nav li a:hover {
-  background-color: #b7b7b7;
+ul a li:hover {
+    -webkit-animation-name: hover;
+    -webkit-animation-duration: 0.4s;
+    animation-fill-mode: both;
 }
+
+@keyframes hover {
+    from {
+        background-color: #F5F5F5;
+        color: black;
+    }
+    to {
+        background-color: #178178;
+        color: #f5f5f5;
+    }
+}
+
 /* EVENT LIST */
 
 ul {
@@ -154,4 +174,16 @@ ul {
 
 #eventlist li {
   padding: 10px;
+}
+
+footer > p > a {
+    text-decoration: none;
+    color: #178178;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
+    -webkit-transition-duration: 0.4s;
+}
+
+footer > p > a:hover {
+    color: #b7b7b7;
 }
