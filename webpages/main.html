@@ -2,7 +2,7 @@
 <html>
     <head lang=en>
         <title>SplitMate</title>
-
+		<!-- Links to our style sheets and Javascript file-->
         <link href="https://fonts.googleapis.com/css?family=Neuton:800|Open+Sans:400,700" rel="stylesheet">
         <link href=./css/main.css rel=stylesheet title=main>
         <script src="js/main.js"></script>
@@ -11,18 +11,21 @@
     <body>
         <main>
             <header>
+				<!-- Splitmate logo and motto-->
                 <img src="/images/logo.png" id=logo />
                 <h1>SplitMate</h1>
                 <h2>Bills made simple<span id='greeting'></span></h2>
             </header>
             <nav>
               <ul id='nav'>
+			  <!-- Navigation buttons to get around the page-->
                 <li><a href='#' onclick="signOut();">Sign Out</a></li>
                 <li><a href='#' onclick="deliver('createEvent');">Create Event</a></li>
                 <li><a href=#>My Home</a></li>
             </nav>
             <article>
               <h3>Your Events</h3>
+				<!-- Shows all of the currently stored events, if 0 then 'No Events' would display-->
                 <ul id='eventlist'>
                   <li>No Events</li>
                 </ul>
