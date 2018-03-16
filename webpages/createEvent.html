@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<!-- HTML Page to create an event-->
     <head lang=en>
         <title>SplitMate</title>
         <link href=./css/index.css rel=stylesheet title=main>
@@ -19,6 +20,7 @@
             </header>
             <nav>
                 <ul>
+					<!-- Buttons used to navigate the page -->
                     <a href='#' onclick="signOut();"><li id=last>Sign Out</li></a>
                     <a href='#'><li>Create Event</li></a>
                     <a href='#' onclick="deliver('main');"><li>My Home</li></a>
@@ -28,6 +30,7 @@
                 <h3>Create an event</h3>
                 <p> Fill in this form to create an event</p>
                 <form>
+				<!-- Form used to create an event with name,description-->
                 <label>Event name: </label>
                     <input
                            type="text"
@@ -45,17 +48,18 @@
                            value="00.00"
                            step="0.01"
                            id="totalSpent">
-                <p> Please enter user's emails to add to this event: </p>
+                <p> Please enter a user's emails to add to this event: </p>
                   <label>User Email: </label>
                     <input id='emailin'
                             type="email"
                             size="40">
                   <button class=blue onclick="return addEmail();">Add Email</button>
                   <p>Current Emails:</p>
+				  <!-- Shows all of the current users added to an event-->
                   <ul id='emaillist'>
                     <li id=init>No emails to display</li>
                   </ul>
-
+				<!-- Button that finalises creation-->
                 <button type="button"
                         onclick="makeEvent();"
                         class=blue
@@ -64,6 +68,7 @@
             </article>
             <footer>
                 <p>
+				<!-- Hyperlinks to find useful information-->
                     <a href=terms.html>Terms of service</a>
                     <a href=http://facebook.com>Our Facebook</a>
                     <a href=http://twitter.com>Our Twitter</a>
