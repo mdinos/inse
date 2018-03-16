@@ -74,7 +74,7 @@ function deliver (req, res) {
 
 // Server function used to create a new event, based on data sent into the Function
 // from main.js.
-function createEvent(request, response) {
+async function createEvent(req, res) {
     let newId = usedIds[usedIds.length - 1] + 1;
     usedIds.push(newId);
     usedIds.shift();
@@ -82,14 +82,15 @@ function createEvent(request, response) {
     // Structure of array stored.
     let newEvent = {
         "id": newId,
-        "eventName": request.query.eventName,
-        "eventDescription": request.query.eventDesc,
-        "testBalance": request.query.testBalance,
-        "emails": request.query.emails
+        "eventName": req.query.eventName,
+        "eventDescription": req.query.eventDesc,
+        "testBalance": req.query.testBalance,
+        "emails": req.query.emails
     }
 
-    events.unshift(newEvent);
-    response.send(newEvent);
+    await db.createEvent(newId, req.query.eventName, req.query.eventDesc, req.query.testBalance, req.query.emails);
+    //events.unshift(newEvent);
+    //response.send(newEvent);
     console.log("Event sent");
     console.log(newEvent);
 };
@@ -102,7 +103,7 @@ async function checkuser (req, res) {
   console.log("entered checkuser function");
   console.log("email to be sent:" + req.user.emails[0].value);
   console.log("user's name: " + req.user.displayName);
-  console.log("user's name split: " + firstName + lastName);
+  console.log("user's name split: " + firstName + " " + lastName);
   await db.login(req.user.emails[0].value, firstName, lastName);
   return;
 }

@@ -14,7 +14,7 @@ let sql = mysql.createConnection({
 });
 
 // DATABASE FUNCTIONS
-async function login (email, fname, lname) {
+function login (email, fname, lname) {
   let insertEmail = "'" + email + "'";
   let fnameIn = "'" + fname + "'";
   let lnameIn = "'" + lname + "'";
@@ -44,5 +44,19 @@ async function login (email, fname, lname) {
   });
 }
 
+function createEvent (eventIdIn, eventNameIn, eventDescIn, eventCostIn, eventEmailsIn) {
+  console.log("entered db function 'createEvent'");
+  let insertEmail = "'" + eventEmailsIn + "'";
+  let insertSet = {eventid: eventIdIn, eventName: eventNameIn, eventDesc: eventDescIn, eventCost: eventCostIn, emails: insertEmail};
+  sql.query(sql.format('INSERT INTO event SET ?', insertSet), (err, data) => {
+    if (err) {
+      console.log("error inserting event into db: " + err);
+      return;
+    }
+    console.log("succesful insert event into db");
+  });
+}
+
 // FUNCTION EXPORTING
 module.exports.login = login;
+module.exports.createEvent = createEvent;
