@@ -69,8 +69,11 @@ async function populateMain(googleUser) {
 
   console.log("insertion into db successful");
   // check database to see if this user has records (with emaik)
-    // if yes then load content`
-    // if not then create fields!
+  // if yes then load content`
+  // if not then create fields!
+
+
+
 
   // populate me!
 }
@@ -138,16 +141,16 @@ async function deliver(page) {
 }
 
 // Function which immediately adds the users email to the list of emails on the page
-async function addUsersEmail(token, auth2, fetchOptions) { 
+async function addUsersEmail(token, auth2, fetchOptions) {
     const response = await fetch('/api/getemail', fetchOptions);
     let userEmail = await response.text();
     let container = document.getElementById('emaillist');
-    
+
     let noEmails = container.children;
     if (noEmails[0].innerHTML == "No emails to display") {
           container.removeChild(noEmails[0]);
     }
-    
+
     let displayUserEmail = document.createElement('li');
     container.appendChild(displayUserEmail);
     displayUserEmail.innerHTML = userEmail;

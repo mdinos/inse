@@ -89,7 +89,7 @@ async function createEvent(req, res) {
         "emails": req.query.emails
     }
 
-    await db.createEvent(newId, req.query.eventName, req.query.eventDesc, req.query.testBalance, req.query.emails);
+    await db.createEvent(req.query.eventName, req.query.eventDesc, req.query.testBalance, req.query.emails);
     //events.unshift(newEvent);
     //response.send(newEvent);
     console.log("Event sent");
