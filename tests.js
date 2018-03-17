@@ -77,3 +77,4 @@ QUnit.test('validateEmail()', function(assert) {
        assert.ok(funcCheck, emails[i].response + ". Email was: " + emails[i].email);
    }
 });
+// TODO Find a way to get a logon token to test the rest of the functions
